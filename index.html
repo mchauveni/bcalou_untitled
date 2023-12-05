@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/code_block.css">
+    <script src="assets/scripts/meteo-card.js" defer></script>
+    <title>PWA About new thingies</title>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <h1 class="main_title">Introducing <span class="main_title__rainbow">Style Queries</span></h1>
+        <section class="intro">
+            <h2 class="intro__title">1. Késako ?</h2>
+            <p class="intro__text">
+                Les <em>style queries</em> permettent de styliser du contenu en fonction du style du <em>conteneur</em>.
+                Le système a été pensé pour tous les types de styles, mais ne fonctionne actuellement qu'avec des
+                <em>variables CSS</em>. La syntaxe est la suivante :
+            </p>
+            <code class="intro__codeexample">
+                <pre>
+<span class="rule">@container style(<span class="property">--theme:</span> dark)</span> <span class="punctuation">{</span>
+    <span class="selector">.section</span> <span class="punctuation">{</span>
+        <span class="property">background-color</span><span class="punctuation">:</span> #222<span class="punctuation">;</span>
+    }
+
+    <span class="selector">.section__title</span><span class="punctuation">,</span>
+    <span class="selector">.section__desc</span> <span class="punctuation">{</span>
+        <span class="property">color</span><span class="punctuation">:</span> #fff<span class="punctuation">;</span>
+    }
+}
+                </pre>
+            </code>
+        </section>
+
+        <meteo-card style="--weather: sunny"></meteo-card>
+    </main>
+    <footer></footer>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+code {
+    font-family: 'Courier New', Courier, monospace;
+    width: min-content;
+}
+
+pre {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    width: min-content;
+    background-color: #1f1f1f;
+    color: #ddd;
+    text-align: left;
+}
+
+.rule {
+    color: #c792ea;
+}
+
+.selector {
+    color: #f07178;
+}
+
+.punctuation {
+    color: #89ddff;
+}
+
+.property {
+    color: #fd9170;
+}
