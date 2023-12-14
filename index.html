@@ -6,19 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/code_block.css">
+    <link rel="manifest" href="/bcuntitled.webmanifest">
     <script src="assets/scripts/meteo-card.js" defer></script>
+    <script src="assets/scripts/meteo-select-handler.js" defer></script>
+    <script src="assets/scripts/button-themes.js" defer></script>
+    <script src="assets/scripts/theme-switch.js" defer></script>
+    <script src="assets/scripts/pwa-handler.js" defer></script>
     <title>PWA About new thingies</title>
 </head>
 
 <body>
-    <header></header>
+    <header class="header">
+        <div class="header__titleWrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor">
+                <path
+                    d="M200-520q-33 0-56.5-23.5T120-600v-160q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v160q0 33-23.5 56.5T760-520H200Zm0-80h560v-160H200v160Zm0 480q-33 0-56.5-23.5T120-200v-160q0-33 23.5-56.5T200-440h560q33 0 56.5 23.5T840-360v160q0 33-23.5 56.5T760-120H200Zm0-80h560v-160H200v160Zm0-400v-160 160Zm0 400v-160 160Z" />
+            </svg>
+            <p class="header__title">KO Docs</p>
+        </div>
+        <div class="header__options">
+            <button class="header__button theme" aria-label="changer le thème"><span
+                    class="theme__icon"></span></button>
+            <button class="header__button installPWA" aria-label="installer la pwa"><svg
+                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                    <path
+                        d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
+                </svg></button>
+        </div>
+    </header>
     <main>
         <h1 class="main_title">Introducing <span class="main_title__rainbow">Style Queries</span></h1>
         <section class="intro">
             <h2 class="intro__title">1. Késako ?</h2>
             <p class="intro__text">
                 Les <em>style queries</em> permettent de styliser du contenu en fonction du style du <em>conteneur</em>.
-                Le système a été pensé pour tous les types de styles, mais ne fonctionne actuellement qu'avec des
+                À l'origine, le système a été pensé pour tous les types de styles, mais ne fonctionne actuellement
+                qu'avec des
                 <em>variables CSS</em>. La syntaxe est la suivante :
             </p>
             <code class="intro__codeexample">
@@ -37,9 +60,82 @@
             </code>
         </section>
 
-        <meteo-card style="--weather: rainy"></meteo-card>
+        <section>
+            <h2 class="intro__title">2. Démos !</h2>
+            <div class="demoMeteo">
+                <form>
+                    <label for="meteo">Changer la météo</label>
+                    <select id="meteo" name="meteo" class="demoMeteo__select">
+                        <option value="unknown">Sélectionnez une météo</option>
+                        <option value="sunny">Sunny</option>
+                        <option value="cloudy">Cloudy</option>
+                        <option value="snowy">Snowy</option>
+                        <option value="rainy">Rainy</option>
+                        <option value="thunderstormy">Thunderstormy</option>
+                    </select>
+                </form>
+                <meteo-card></meteo-card>
+            </div>
+            <p>Pour cet élément de carte météo, on a juste à modifier la variable <em>--weather</em> pour changer
+                l'affichage de l'icône ou du texte, et tout ça en <em>pur CSS</em> !</p>
+            <p>Additionnellement, cette fonctionnalité CSS peut servir à créer des <em>thèmes indépendants</em>, il
+                suffit juste de créer plusieurs fichiers CSS indépendants, pour chaque thème.</p>
+            <div class="demoButtons">
+                <div class="demoButtons__wrapper">
+                    <span class="demoButtons__theme">Thème : classic</span>
+                    <button-theme style="--theme: classic;"></button-theme>
+                </div>
+                <div class="demoButtons__wrapper">
+                    <span class="demoButtons__theme">Thème : gradient</span>
+                    <button-theme style="--theme: gradient;"></button-theme>
+                </div>
+                <div class="demoButtons__wrapper">
+                    <span class="demoButtons__theme">Thème : retro</span>
+                    <button-theme style="--theme: retro;"></button-theme>
+                </div>
+                <div class="demoButtons__wrapper">
+                    <span class="demoButtons__theme">Thème : clear</span>
+                    <button-theme style="--theme: clear;"></button-theme>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Avantages et invonvénients</h2>
+            <p>
+                Cette fonctionnalité permet de facilement créer un <em>héritage CSS</em> (si un élément possède une
+                bordure rouge, alors certains de ses enfants pourraient l'avoir). Elle permet d'<em>isoler le CSS</em>
+                et de réduire <em>le nombre de classes</em> tout en fournissant davantage de <em>stabilité</em>.
+            </p>
+            <p>
+                En revanche, cette fonctionnalité CSS n'est encore <em>pas supporté</em> par la plupart des navigateurs.
+                Il faut généralement utiliser des <em>flags</em> pour en profiter. (voir <a
+                    href="https://caniuse.com/?search=style%20queries" target="_blank">la référence caniuse</a>)
+            </p>
+        </section>
+
+        <section>
+            <h2 class="intro__title">4. Les petits plus</h2>
+            <p>
+                Les choses à savoir concernant la conception de cette application !
+            </p>
+            <p>
+                Le JS présent ne sert qu'à <em>changer des classes</em> CSS ou définir des <em>Web Components</em> (la
+                carte météo ou les boutons stylisés très jolis), tout le reste c'est du <em>CSS pur et brut</em> !
+            </p>
+            <p>
+                En CSS, j'ai juste mit une <em>transition-duration: 300ms</em> sur TOUT, et c'est intéressant l'effet
+                que ça donne, avec les délais et tout. Je pense que ça doit venir du fait que ce soit une fonctionnalité
+                expérimentale, et que les styles queries s'appliquent les unes à la suite des autres plutôt
+                qu'instantanément.
+            </p>
+            <p><em>Merci pour tout M. Calou, on vous aime ♥</em></p>
+        </section>
     </main>
-    <footer></footer>
+    <footer class="footer">
+        <a href="https://github.com/mchauveni/pwa_webc_bcalou_untitled" target="_blank">Repo Github</a>
+        <p>Made by Mchauveni</p>
+    </footer>
 </body>
 
 </html>

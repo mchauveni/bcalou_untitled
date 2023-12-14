@@ -18,6 +18,7 @@ class MeteoCard extends HTMLElement {
             border-radius: 0.5rem;
             width: 200px;
             height: 250px;
+            color: black;
         }
         
         .date {
@@ -135,17 +136,6 @@ class MeteoCard extends HTMLElement {
             </div>
         </div>
         `;
-
-        this.$date__day = this.shadowRoot.querySelector('.date__day');
-        this.$date__month = this.shadowRoot.querySelector('.date__month');
-        this.$date__number = this.shadowRoot.querySelector('.date__number');
-    }
-
-    setDate() {
-        let today = new Date(Date.now());
-        this.$date__day.innerHTML = "";
-        this.$date__month.innerHTML = "";
-        this.$date__number.innerHTML = "";
     }
 }
 
